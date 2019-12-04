@@ -1,0 +1,14 @@
+F:\Visual Studio\CS_GUI_DEMO\bin\Release\五十音图.exe.config
+F:\Visual Studio\CS_GUI_DEMO\bin\Release\五十音图.exe.manifest
+F:\Visual Studio\CS_GUI_DEMO\bin\Release\五十音图.application
+F:\Visual Studio\CS_GUI_DEMO\bin\Release\五十音图.exe
+F:\Visual Studio\CS_GUI_DEMO\bin\Release\五十音图.pdb
+F:\Visual Studio\CS_GUI_DEMO\obj\Release\CS_GUI_DEMO.csprojAssemblyReference.cache
+F:\Visual Studio\CS_GUI_DEMO\obj\Release\CS_GUI_DEMO.About.resources
+F:\Visual Studio\CS_GUI_DEMO\obj\Release\CS_GUI_DEMO.MainForm.resources
+F:\Visual Studio\CS_GUI_DEMO\obj\Release\TODEST.Properties.Resources.resources
+F:\Visual Studio\CS_GUI_DEMO\obj\Release\CS_GUI_DEMO.csproj.GenerateResource.cache
+F:\Visual Studio\CS_GUI_DEMO\obj\Release\五十音图.exe.manifest
+F:\Visual Studio\CS_GUI_DEMO\obj\Release\五十音图.application
+F:\Visual Studio\CS_GUI_DEMO\obj\Release\五十音图.exe
+F:\Visual Studio\CS_GUI_DEMO\obj\Release\五十音图.pdb
