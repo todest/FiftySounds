@@ -1,13 +1,13 @@
 F:\Visual Studio\CS_GUI_DEMO\bin\Debug\五十音图.exe.config
+F:\Visual Studio\CS_GUI_DEMO\bin\Debug\五十音图.exe.manifest
+F:\Visual Studio\CS_GUI_DEMO\bin\Debug\五十音图.application
 F:\Visual Studio\CS_GUI_DEMO\bin\Debug\五十音图.exe
 F:\Visual Studio\CS_GUI_DEMO\bin\Debug\五十音图.pdb
 F:\Visual Studio\CS_GUI_DEMO\obj\Debug\CS_GUI_DEMO.About.resources
 F:\Visual Studio\CS_GUI_DEMO\obj\Debug\CS_GUI_DEMO.MainForm.resources
 F:\Visual Studio\CS_GUI_DEMO\obj\Debug\TODEST.Properties.Resources.resources
 F:\Visual Studio\CS_GUI_DEMO\obj\Debug\CS_GUI_DEMO.csproj.GenerateResource.cache
-F:\Visual Studio\CS_GUI_DEMO\obj\Debug\五十音图.exe
-F:\Visual Studio\CS_GUI_DEMO\obj\Debug\五十音图.pdb
-F:\Visual Studio\CS_GUI_DEMO\bin\Debug\五十音图.exe.manifest
-F:\Visual Studio\CS_GUI_DEMO\bin\Debug\五十音图.application
 F:\Visual Studio\CS_GUI_DEMO\obj\Debug\五十音图.exe.manifest
 F:\Visual Studio\CS_GUI_DEMO\obj\Debug\五十音图.application
+F:\Visual Studio\CS_GUI_DEMO\obj\Debug\五十音图.exe
+F:\Visual Studio\CS_GUI_DEMO\obj\Debug\五十音图.pdb

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
-            this.Container = new System.Windows.Forms.TextBox();
+            this.ContainBox = new System.Windows.Forms.TextBox();
             this.BuildTime = new System.Windows.Forms.Label();
             this.Sign = new System.Windows.Forms.Label();
             this.Title = new System.Windows.Forms.Label();
@@ -38,22 +38,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // Container
+            // ContainBox
             // 
-            this.Container.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Container.CausesValidation = false;
-            this.Container.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Container.Enabled = false;
-            this.Container.Location = new System.Drawing.Point(40, 78);
-            this.Container.Margin = new System.Windows.Forms.Padding(0);
-            this.Container.Multiline = true;
-            this.Container.Name = "Container";
-            this.Container.ReadOnly = true;
-            this.Container.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.Container.ShortcutsEnabled = false;
-            this.Container.Size = new System.Drawing.Size(300, 165);
-            this.Container.TabIndex = 0;
-            this.Container.TabStop = false;
+            this.ContainBox.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ContainBox.CausesValidation = false;
+            this.ContainBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ContainBox.Enabled = false;
+            this.ContainBox.Location = new System.Drawing.Point(40, 78);
+            this.ContainBox.Margin = new System.Windows.Forms.Padding(0);
+            this.ContainBox.Multiline = true;
+            this.ContainBox.Name = "ContainBox";
+            this.ContainBox.ReadOnly = true;
+            this.ContainBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.ContainBox.ShortcutsEnabled = false;
+            this.ContainBox.Size = new System.Drawing.Size(300, 165);
+            this.ContainBox.TabIndex = 0;
+            this.ContainBox.TabStop = false;
             // 
             // BuildTime
             // 
@@ -132,7 +132,7 @@
             this.Controls.Add(this.Title);
             this.Controls.Add(this.Sign);
             this.Controls.Add(this.BuildTime);
-            this.Controls.Add(this.Container);
+            this.Controls.Add(this.ContainBox);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -149,7 +149,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox Container;
+        private System.Windows.Forms.TextBox ContainBox;
         private System.Windows.Forms.Label BuildTime;
         private System.Windows.Forms.Label Sign;
         private System.Windows.Forms.Label Title;

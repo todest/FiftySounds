@@ -136,16 +136,17 @@ namespace CS_GUI_DEMO
                 L.Remove(L[t]);
             }
             Schedule.Text = string.Format("{0:D} / {1:D}", 1, sum);
-            if (R[0].Item1 == 0) Show.Text = Hiragana[R[0].Item2];
-            else if (R[0].Item1 == 1) Show.Text = Katakana[R[0].Item2];
-            else if (R[0].Item1 == 2) Show.Text = Voiced[R[0].Item2];
-            else if (R[0].Item1 == 3) Show.Text = Ao[R[0].Item2];
-            else if (R[0].Item1 == 4) Show.Text = Long[R[0].Item2];
-            else if (R[0].Item1 == 5) Show.Text = Accent[R[0].Item2];
+            if (R[0].Item1 == 0) ShowText.Text = Hiragana[R[0].Item2];
+            else if (R[0].Item1 == 1) ShowText.Text = Katakana[R[0].Item2];
+            else if (R[0].Item1 == 2) ShowText.Text = Voiced[R[0].Item2];
+            else if (R[0].Item1 == 3) ShowText.Text = Ao[R[0].Item2];
+            else if (R[0].Item1 == 4) ShowText.Text = Long[R[0].Item2];
+            else if (R[0].Item1 == 5) ShowText.Text = Accent[R[0].Item2];
         }
 
         public MainForm()
         {
+            Font = new Font(Font.Name, 8.25f * 96f / CreateGraphics().DpiX, Font.Style, Font.Unit, Font.GdiCharSet, Font.GdiVerticalFont);
             InitializeComponent();
             Init();
         }
@@ -153,12 +154,14 @@ namespace CS_GUI_DEMO
         private void MainForm_Load(object sender, EventArgs e)
         {
             /*默认设置*/
-            Show.Text = "▶";
+            ShowText.Text = "▶";
             Correct.Visible = false;
             Wrong.Visible = false;
             Schedule.Visible = false;
             Timer.Visible = false;
-            Submit.Visible = false; 
+            Submit.Visible = false;
+            Log.Visible = false;
+            LogTitle.Visible = false;
             HiraganaToolStripMenuItem.Checked = true;
             KatakanaToolStripMenuItem.Checked = false;
             VoicedToolStripMenuItem.Checked = false;
@@ -178,6 +181,7 @@ namespace CS_GUI_DEMO
             AoToolStripMenuItem.Enabled = false;
             LongToolStripMenuItem.Enabled = false;
             AccentToolStripMenuItem.Enabled = false;
+            UpdateToolStripMenuItem.Enabled = false;
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -187,6 +191,8 @@ namespace CS_GUI_DEMO
 
         private void StartToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Submit.Text = "";
+            Log.Text = "";
             Submit.Visible = true;
             Submit.Focus();
             StartToolStripMenuItem.Enabled = false;
@@ -195,7 +201,7 @@ namespace CS_GUI_DEMO
 
             for (int i = 3; i >= 1; i--)
             {
-                Show.Text = i.ToString();
+                ShowText.Text = i.ToString();
                 Delay(1000);
             }
             int[] Lvl = new int[10];
@@ -217,6 +223,8 @@ namespace CS_GUI_DEMO
             AccentToolStripMenuItem.Enabled = false;
 
             LoadTest(Lvl, pos);
+            Log.Visible = true;
+            LogTitle.Visible = true;
             Timer.Visible = true;
             Schedule.Visible = true;
             Correct.Visible = true;
@@ -231,7 +239,7 @@ namespace CS_GUI_DEMO
                 Delay(1000);
             }
             Schedule.Text = string.Format("正确率: {0:P}", 1.0 * CorrectCount / R.Count);
-            Show.Text = "X";
+            ShowText.Text = "▶";
         }
 
         private void HiraganaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -259,11 +267,13 @@ namespace CS_GUI_DEMO
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
             Schedule.Location = new System.Drawing.Point((this.Width - Schedule.Width) / 2, this.Height / 8);
-            Show.Location = new System.Drawing.Point((this.Width - Show.Width) / 2, (this.Height - Show.Height) / 5 * 2);
+            ShowText.Location = new System.Drawing.Point((this.Width - ShowText.Width) / 2, (this.Height - ShowText.Height) / 5 * 2);
             Submit.Location = new System.Drawing.Point((this.Width - Submit.Width) / 2, (this.Height - Submit.Height) / 4 * 3);
             Correct.Location = new System.Drawing.Point(this.Width / 10, this.Height / 5);
             Wrong.Location = new System.Drawing.Point(this.Width / 10, this.Height / 3);
             Timer.Location = new System.Drawing.Point((this.Width - Timer.Width) / 10 * 9, this.Height / 8);
+            Log.Location = new System.Drawing.Point((this.Width - Log.Width) / 10 * 9, (this.Height - Log.Height) / 5 * 2);
+            LogTitle.Location = new System.Drawing.Point(Log.Location.X, Log.Location.Y - LogTitle.Height);
         }
 
         private void Schedule_SizeChanged(object sender, EventArgs e)
@@ -293,6 +303,12 @@ namespace CS_GUI_DEMO
             
         }
 
+        private void Log_TextChanged(object sender, EventArgs e)
+        {
+            Log.SelectionStart = Log.Text.Length;
+            Log.ScrollToCaret();
+        }
+
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -305,13 +321,22 @@ namespace CS_GUI_DEMO
                 if (R[Count].Item1 <= 1)
                 {
                     if (Submit.Text == Unvoiced[R[Count].Item2]) CorrectCount++;
-                    else WrongCount++;
-                    if (R[Count].Item1 == 0) Show.Text = Hiragana[R[++Count].Item2];
-                    else if (R[Count].Item1 == 1) Show.Text = Katakana[R[++Count].Item2];
-                    else if (R[Count].Item1 == 2) Show.Text = Voiced[R[++Count].Item2];
-                    else if (R[Count].Item1 == 3) Show.Text = Ao[R[++Count].Item2];
-                    else if (R[Count].Item1 == 4) Show.Text = Long[R[++Count].Item2];
-                    else if (R[Count].Item1 == 5) Show.Text = Accent[R[++Count].Item2];
+                    else
+                    {
+                        WrongCount++;
+                        if (R[Count].Item1 == 0)
+                            Log.Text += Hiragana[R[Count].Item2];
+                        else if (R[Count].Item1 == 1)
+                            Log.Text += Katakana[R[Count].Item2];
+                        Log.Text += ":  " + Unvoiced[R[Count].Item2] + Environment.NewLine;
+                        
+                    }
+                    if (R[Count].Item1 == 0) ShowText.Text = Hiragana[R[++Count].Item2];
+                    else if (R[Count].Item1 == 1) ShowText.Text = Katakana[R[++Count].Item2];
+                    else if (R[Count].Item1 == 2) ShowText.Text = Voiced[R[++Count].Item2];
+                    else if (R[Count].Item1 == 3) ShowText.Text = Ao[R[++Count].Item2];
+                    else if (R[Count].Item1 == 4) ShowText.Text = Long[R[++Count].Item2];
+                    else if (R[Count].Item1 == 5) ShowText.Text = Accent[R[++Count].Item2];
                 }
                 Submit.Text = "";
                 Correct.Text = string.Format("正确: {0:D}", CorrectCount);

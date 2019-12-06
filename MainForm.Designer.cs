@@ -45,11 +45,13 @@
             this.UpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Submit = new System.Windows.Forms.TextBox();
-            this.Show = new System.Windows.Forms.Label();
+            this.ShowText = new System.Windows.Forms.Label();
             this.Correct = new System.Windows.Forms.Label();
             this.Wrong = new System.Windows.Forms.Label();
             this.Schedule = new System.Windows.Forms.Label();
             this.Timer = new System.Windows.Forms.Label();
+            this.Log = new System.Windows.Forms.TextBox();
+            this.LogTitle = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +66,7 @@
             this.AboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(782, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(782, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -76,7 +78,7 @@
             this.ExitToolStripMenuItem,
             this.QuitToolStripMenuItem});
             this.ToolStripMenuItem.Name = "ToolStripMenuItem";
-            this.ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.ToolStripMenuItem.Text = "设置";
             // 
             // StartToolStripMenuItem
@@ -117,7 +119,7 @@
             this.LongToolStripMenuItem,
             this.AccentToolStripMenuItem});
             this.LvlToolStripMenuItem.Name = "LvlToolStripMenuItem";
-            this.LvlToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.LvlToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.LvlToolStripMenuItem.Text = "级别";
             // 
             // HiraganaToolStripMenuItem
@@ -163,14 +165,14 @@
             // UpdateToolStripMenuItem
             // 
             this.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem";
-            this.UpdateToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.UpdateToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.UpdateToolStripMenuItem.Text = "更新";
             this.UpdateToolStripMenuItem.Click += new System.EventHandler(this.UpdateToolStripMenuItem_Click);
             // 
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.AboutToolStripMenuItem.Text = "关于";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -185,20 +187,20 @@
             this.Submit.TabIndex = 1;
             this.Submit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Submit_KeyDown);
             // 
-            // Show
+            // ShowText
             // 
-            this.Show.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.Show.AutoSize = true;
-            this.Show.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Show.Font = new System.Drawing.Font("宋体", 42F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Show.Location = new System.Drawing.Point(300, 100);
-            this.Show.Margin = new System.Windows.Forms.Padding(0);
-            this.Show.MinimumSize = new System.Drawing.Size(200, 150);
-            this.Show.Name = "Show";
-            this.Show.Size = new System.Drawing.Size(200, 150);
-            this.Show.TabIndex = 2;
-            this.Show.Text = "▶";
-            this.Show.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ShowText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.ShowText.AutoSize = true;
+            this.ShowText.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ShowText.Font = new System.Drawing.Font("宋体", 42F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ShowText.Location = new System.Drawing.Point(300, 100);
+            this.ShowText.Margin = new System.Windows.Forms.Padding(0);
+            this.ShowText.MinimumSize = new System.Drawing.Size(200, 150);
+            this.ShowText.Name = "ShowText";
+            this.ShowText.Size = new System.Drawing.Size(200, 150);
+            this.ShowText.TabIndex = 2;
+            this.ShowText.Text = "▶";
+            this.ShowText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Correct
             // 
@@ -245,16 +247,42 @@
             this.Timer.TabIndex = 6;
             this.Timer.Text = "00:00";
             // 
+            // Log
+            // 
+            this.Log.BackColor = System.Drawing.SystemColors.Window;
+            this.Log.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.Log.Location = new System.Drawing.Point(600, 100);
+            this.Log.Margin = new System.Windows.Forms.Padding(0);
+            this.Log.Multiline = true;
+            this.Log.Name = "Log";
+            this.Log.ReadOnly = true;
+            this.Log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.Log.Size = new System.Drawing.Size(120, 150);
+            this.Log.TabIndex = 7;
+            this.Log.TextChanged += new System.EventHandler(this.Log_TextChanged);
+            // 
+            // LogTitle
+            // 
+            this.LogTitle.AutoSize = true;
+            this.LogTitle.Location = new System.Drawing.Point(600, 80);
+            this.LogTitle.Margin = new System.Windows.Forms.Padding(0);
+            this.LogTitle.Name = "LogTitle";
+            this.LogTitle.Size = new System.Drawing.Size(39, 15);
+            this.LogTitle.TabIndex = 8;
+            this.LogTitle.Text = "Log:";
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(782, 453);
+            this.Controls.Add(this.LogTitle);
+            this.Controls.Add(this.Log);
             this.Controls.Add(this.Timer);
             this.Controls.Add(this.Schedule);
             this.Controls.Add(this.Wrong);
             this.Controls.Add(this.Correct);
-            this.Controls.Add(this.Show);
+            this.Controls.Add(this.ShowText);
             this.Controls.Add(this.Submit);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -277,7 +305,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.TextBox Submit;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem;
-        private System.Windows.Forms.Label Show;
+        private System.Windows.Forms.Label ShowText;
         private System.Windows.Forms.ToolStripMenuItem StartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RestartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
@@ -295,6 +323,8 @@
         private System.Windows.Forms.ToolStripMenuItem AccentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem UpdateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
+        private System.Windows.Forms.TextBox Log;
+        private System.Windows.Forms.Label LogTitle;
     }
 }
 
