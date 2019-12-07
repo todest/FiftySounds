@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Threading.Tasks;
 using System.IO;
+using System.Net;
+using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace CS_GUI_DEMO
 {
@@ -23,6 +22,17 @@ namespace CS_GUI_DEMO
         List<Tuple<int, int>> R = new List<Tuple<int, int>>();
         int Count = 0, CorrectCount, WrongCount;
         bool Over;
+
+        public System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            string dllName = args.Name.Contains(",") ? args.Name.Substring(0, args.Name.IndexOf(',')) : args.Name.Replace(".dll", "");
+            dllName = dllName.Replace(".", "_");
+            if (dllName.EndsWith("_resources")) return null;
+            System.Resources.ResourceManager rm = new System.Resources.ResourceManager(GetType().Namespace + ".Properties.Resources", System.Reflection.Assembly.GetExecutingAssembly());
+            byte[] bytes = (byte[])rm.GetObject(dllName);
+            return System.Reflection.Assembly.Load(bytes);
+        }
+
         public void Init()
         {
             //清音
@@ -82,6 +92,76 @@ namespace CS_GUI_DEMO
                 Application.DoEvents();
             }
             return;
+        }
+
+        public static string Get(string url)
+        {
+            string result = "";
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.UserAgent = "[Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36]";
+            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+            Stream stream = resp.GetResponseStream();
+            try
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    result = reader.ReadToEnd();
+                }
+            }
+            finally
+            {
+                stream.Close();
+            }
+            return result;
+        }
+
+        public static void DelayRun(string path, int time)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo("cmd.exe", "/C ping 127.0.0.1 -n " + time + " -w 1000 > Nul && del /F update.old && \"" + path + "\"")
+            {
+                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true
+            };
+            Process.Start(psi);
+            Application.Exit();
+        }
+
+        public bool DownloadFile(string URL, string filename)
+        {
+            string tempPath = Path.GetDirectoryName(filename) + @"\temp";
+            Directory.CreateDirectory(tempPath);
+            string tempFile = tempPath + @"\" + Path.GetFileName(filename) + ".temp";
+            if (File.Exists(tempFile))
+            {
+                File.Delete(tempFile);
+            }
+            try
+            {
+                FileStream fs = new FileStream(tempFile, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+                HttpWebRequest request = WebRequest.Create(URL) as HttpWebRequest;
+                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                Stream responseStream = response.GetResponseStream();
+                byte[] bArr = new byte[1024];
+                int size = responseStream.Read(bArr, 0, (int)bArr.Length);
+                while (size > 0)
+                {
+                    fs.Write(bArr, 0, size);
+                    size = responseStream.Read(bArr, 0, (int)bArr.Length);
+                }
+                fs.Close();
+                responseStream.Close();
+                if (File.Exists(filename))
+                {
+                    File.Delete(filename);
+                }
+                File.Move(tempFile, filename);
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
         }
 
         public void LoadTest(int[] a, int n)
@@ -146,6 +226,7 @@ namespace CS_GUI_DEMO
 
         public MainForm()
         {
+            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
             InitializeComponent();
             Init();
         }
@@ -180,7 +261,6 @@ namespace CS_GUI_DEMO
             AoToolStripMenuItem.Enabled = false;
             LongToolStripMenuItem.Enabled = false;
             AccentToolStripMenuItem.Enabled = false;
-            UpdateToolStripMenuItem.Enabled = false;
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -265,19 +345,19 @@ namespace CS_GUI_DEMO
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
-            Schedule.Location = new System.Drawing.Point((this.Width - Schedule.Width) / 2, this.Height / 8);
-            ShowText.Location = new System.Drawing.Point((this.Width - ShowText.Width) / 2, (this.Height - ShowText.Height) / 5 * 2);
-            Submit.Location = new System.Drawing.Point((this.Width - Submit.Width) / 2, (this.Height - Submit.Height) / 4 * 3);
-            Correct.Location = new System.Drawing.Point(this.Width / 10, this.Height / 5);
-            Wrong.Location = new System.Drawing.Point(this.Width / 10, this.Height / 3);
-            Timer.Location = new System.Drawing.Point((this.Width - Timer.Width) / 10 * 9, this.Height / 8);
-            Log.Location = new System.Drawing.Point((this.Width - Log.Width) / 10 * 9, (this.Height - Log.Height) / 5 * 2);
-            LogTitle.Location = new System.Drawing.Point(Log.Location.X, Log.Location.Y - LogTitle.Height);
+            Schedule.Location = new Point((this.Width - Schedule.Width) / 2, this.Height / 8);
+            ShowText.Location = new Point((this.Width - ShowText.Width) / 2, (this.Height - ShowText.Height) / 5 * 2);
+            Submit.Location = new Point((this.Width - Submit.Width) / 2, (this.Height - Submit.Height) / 4 * 3);
+            Correct.Location = new Point(this.Width / 10, this.Height / 5);
+            Wrong.Location = new Point(this.Width / 10, this.Height / 3);
+            Timer.Location = new Point((this.Width - Timer.Width) / 10 * 9, this.Height / 8);
+            Log.Location = new Point((this.Width - Log.Width) / 10 * 9, (this.Height - Log.Height) / 5 * 2);
+            LogTitle.Location = new Point(Log.Location.X, Log.Location.Y - LogTitle.Height);
         }
 
         private void Schedule_SizeChanged(object sender, EventArgs e)
         {
-            Schedule.Location = new System.Drawing.Point((this.Width - Schedule.Width) / 2, this.Height / 8);
+            Schedule.Location = new Point((this.Width - Schedule.Width) / 2, this.Height / 8);
         }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -285,21 +365,42 @@ namespace CS_GUI_DEMO
             About about = new About();
             about.Show();
         }
-        public void Web_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            WebBrowser web = (WebBrowser)sender;
-            HtmlElementCollection ElementCollection = web.Document.GetElementsByTagName("Table");
-            foreach (HtmlElement item in ElementCollection)
-            {
-                File.AppendAllText("version", item.InnerText);
-            }
-        }
+
         private void UpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WebBrowser web = new WebBrowser();
-            web.Navigate("http://localhost:8080/download/version");
-            web.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(Web_DocumentCompleted);
-            
+            string jsonText = Get("https://api.github.com/repos/todest/FiftySounds/releases/latest");
+            RootObject rb = JsonConvert.DeserializeObject<RootObject>(jsonText);
+            if(rb.tag_name == "v" + Application.ProductVersion)
+            {
+                MessageBox.Show("已是最新版本!", "检查更新");
+            }
+            else
+            {
+                if(MessageBox.Show("检测到新版本!  是否更新?", "检查更新", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    if (DownloadFile(rb.assets[0].browser_download_url, "update.exe"))
+                    {
+                        string oldName = Process.GetCurrentProcess().MainModule.FileName;
+                        FileInfo fi = new FileInfo(oldName);
+                        FileInfo fo = new FileInfo("./update.exe");
+                        if (File.Exists("./update.old"))
+                        {
+                            File.Delete("./update.old");
+                        }
+                        fi.MoveTo("./update.old");
+                        fo.MoveTo(oldName);
+                        if(MessageBox.Show("重启以完成更新!", "更新", MessageBoxButtons.OK) == DialogResult.OK)
+                        {
+                            DelayRun(oldName, 1);
+                            Application.Exit();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("由于未知原因,下载更新失败!", "提示", MessageBoxButtons.OK);
+                    }
+                }
+            }
         }
 
         private void Log_TextChanged(object sender, EventArgs e)

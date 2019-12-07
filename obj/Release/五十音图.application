@@ -14,14 +14,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="五十音图.exe.manifest" size="5092">
+    <dependentAssembly dependencyType="install" codebase="五十音图.exe.manifest" size="5093">
       <assemblyIdentity name="五十音图.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bezUDH8trtZ/V4T+i27+MeeLiUawqPJxbc5WHwKZyPs=</dsig:DigestValue>
+        <dsig:DigestValue>jmtviBrWBuSM8jZaLxaadUyqF2sB6zxTmziq/6no1Rk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
