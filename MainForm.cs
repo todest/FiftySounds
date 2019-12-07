@@ -399,38 +399,45 @@ namespace CS_GUI_DEMO
 
         private void UpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string jsonText = Get("https://api.github.com/repos/todest/FiftySounds/releases/latest");
-            RootObject rb = JsonConvert.DeserializeObject<RootObject>(jsonText);
-            if (CompareVersion(rb.tag_name.Substring(1), Application.ProductVersion))
+            try
             {
-                if (MessageBox.Show("检测到新版本!  是否更新?", "检查更新", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                string jsonText = Get("https://api.github.com/repos/todest/FiftySounds/releases/latest");
+                RootObject rb = JsonConvert.DeserializeObject<RootObject>(jsonText);
+                if (CompareVersion(rb.tag_name.Substring(1), Application.ProductVersion))
                 {
-                    if (DownloadFile(rb.assets[0].browser_download_url, "update.exe"))
+                    if (MessageBox.Show("检测到新版本!  是否更新?", "检查更新", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        string oldName = Process.GetCurrentProcess().MainModule.FileName;
-                        FileInfo fi = new FileInfo(oldName);
-                        FileInfo fo = new FileInfo("./update.exe");
-                        if (File.Exists("./update.old"))
+                        if (DownloadFile(rb.assets[0].browser_download_url, "update.exe"))
                         {
-                            File.Delete("./update.old");
+                            string oldName = Process.GetCurrentProcess().MainModule.FileName;
+                            FileInfo fi = new FileInfo(oldName);
+                            FileInfo fo = new FileInfo("./update.exe");
+                            if (File.Exists("./update.old"))
+                            {
+                                File.Delete("./update.old");
+                            }
+                            fi.MoveTo("./update.old");
+                            fo.MoveTo(oldName);
+                            if (MessageBox.Show("重启以完成更新!", "更新", MessageBoxButtons.OK) == DialogResult.OK)
+                            {
+                                DelayRun(oldName, 1);
+                                Application.Exit();
+                            }
                         }
-                        fi.MoveTo("./update.old");
-                        fo.MoveTo(oldName);
-                        if (MessageBox.Show("重启以完成更新!", "更新", MessageBoxButtons.OK) == DialogResult.OK)
+                        else
                         {
-                            DelayRun(oldName, 1);
-                            Application.Exit();
+                            MessageBox.Show("由于未知原因,下载更新失败!", "提示", MessageBoxButtons.OK);
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("由于未知原因,下载更新失败!", "提示", MessageBoxButtons.OK);
                     }
                 }
+                else
+                {
+                    MessageBox.Show("已是最新版本!", "检查更新");
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("已是最新版本!", "检查更新");
+                MessageBox.Show("网络连接失败!", "提示");
             }
         }
 
