@@ -52,6 +52,7 @@
             this.Timer = new System.Windows.Forms.Label();
             this.Log = new System.Windows.Forms.TextBox();
             this.LogTitle = new System.Windows.Forms.Label();
+            this.BackUpdate = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,7 +67,7 @@
             this.AboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(782, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(782, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -78,7 +79,7 @@
             this.ExitToolStripMenuItem,
             this.QuitToolStripMenuItem});
             this.ToolStripMenuItem.Name = "ToolStripMenuItem";
-            this.ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.ToolStripMenuItem.Text = "设置";
             // 
             // StartToolStripMenuItem
@@ -119,7 +120,7 @@
             this.LongToolStripMenuItem,
             this.AccentToolStripMenuItem});
             this.LvlToolStripMenuItem.Name = "LvlToolStripMenuItem";
-            this.LvlToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.LvlToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.LvlToolStripMenuItem.Text = "级别";
             // 
             // HiraganaToolStripMenuItem
@@ -165,14 +166,14 @@
             // UpdateToolStripMenuItem
             // 
             this.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem";
-            this.UpdateToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.UpdateToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.UpdateToolStripMenuItem.Text = "更新";
             this.UpdateToolStripMenuItem.Click += new System.EventHandler(this.UpdateToolStripMenuItem_Click);
             // 
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.AboutToolStripMenuItem.Text = "关于";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -272,6 +273,11 @@
             this.LogTitle.TabIndex = 8;
             this.LogTitle.Text = "Log:";
             // 
+            // BackUpdate
+            // 
+            this.BackUpdate.WorkerReportsProgress = true;
+            this.BackUpdate.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackUpdate_DoWork);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -326,6 +332,7 @@
         private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
         private System.Windows.Forms.TextBox Log;
         private System.Windows.Forms.Label LogTitle;
+        private System.ComponentModel.BackgroundWorker BackUpdate;
     }
 }
 

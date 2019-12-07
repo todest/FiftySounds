@@ -401,6 +401,30 @@ namespace CS_GUI_DEMO
         {
             try
             {
+                BackUpdate.RunWorkerAsync();
+            }
+            catch
+            {
+                
+            }
+        }
+
+        private void Log_TextChanged(object sender, EventArgs e)
+        {
+            Log.SelectionStart = Log.Text.Length;
+            Log.ScrollToCaret();
+        }
+
+        private void ShowText_Click(object sender, EventArgs e)
+        {
+            if (ShowText.Text == "▶")
+            RestartToolStripMenuItem_Click(sender, e);
+        }
+
+        private void BackUpdate_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
                 string jsonText = Get("https://api.github.com/repos/todest/FiftySounds/releases/latest");
                 RootObject rb = JsonConvert.DeserializeObject<RootObject>(jsonText);
                 if (CompareVersion(rb.tag_name.Substring(1), Application.ProductVersion))
@@ -439,18 +463,6 @@ namespace CS_GUI_DEMO
             {
                 MessageBox.Show("网络连接失败!", "提示");
             }
-        }
-
-        private void Log_TextChanged(object sender, EventArgs e)
-        {
-            Log.SelectionStart = Log.Text.Length;
-            Log.ScrollToCaret();
-        }
-
-        private void ShowText_Click(object sender, EventArgs e)
-        {
-            if (ShowText.Text == "▶")
-            RestartToolStripMenuItem_Click(sender, e);
         }
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)

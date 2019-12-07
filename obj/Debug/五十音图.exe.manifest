@@ -4,7 +4,7 @@
   <description asmv2:iconFile="head.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="五十音图" version="1.3.1.38715" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="五十音图" version="1.3.3.40338" language="neutral" processorArchitecture="msil" />
     <commandLine file="五十音图.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="五十音图.exe" size="1580976">
-      <assemblyIdentity name="五十音图" version="1.3.1.38715" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="五十音图.exe" size="1581488">
+      <assemblyIdentity name="五十音图" version="1.3.3.40338" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>e+P+d32iflDpft48CFnqrD4gxutvr4+sBEtKcmR3LtA=</dsig:DigestValue>
+        <dsig:DigestValue>neJpxhqjoCnRRzyTDdzo19FjJLE+5qSBNOyFHLnOnn0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
