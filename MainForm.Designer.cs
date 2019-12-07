@@ -66,7 +66,7 @@
             this.AboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(782, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(782, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -78,7 +78,7 @@
             this.ExitToolStripMenuItem,
             this.QuitToolStripMenuItem});
             this.ToolStripMenuItem.Name = "ToolStripMenuItem";
-            this.ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.ToolStripMenuItem.Text = "设置";
             // 
             // StartToolStripMenuItem
@@ -119,7 +119,7 @@
             this.LongToolStripMenuItem,
             this.AccentToolStripMenuItem});
             this.LvlToolStripMenuItem.Name = "LvlToolStripMenuItem";
-            this.LvlToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.LvlToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.LvlToolStripMenuItem.Text = "级别";
             // 
             // HiraganaToolStripMenuItem
@@ -165,14 +165,14 @@
             // UpdateToolStripMenuItem
             // 
             this.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem";
-            this.UpdateToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.UpdateToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.UpdateToolStripMenuItem.Text = "更新";
             this.UpdateToolStripMenuItem.Click += new System.EventHandler(this.UpdateToolStripMenuItem_Click);
             // 
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.AboutToolStripMenuItem.Text = "关于";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -181,7 +181,7 @@
             this.Submit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Submit.Font = new System.Drawing.Font("宋体", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Submit.Location = new System.Drawing.Point(340, 300);
-            this.Submit.MaxLength = 8;
+            this.Submit.MaxLength = 3;
             this.Submit.Name = "Submit";
             this.Submit.Size = new System.Drawing.Size(120, 50);
             this.Submit.TabIndex = 1;
@@ -201,6 +201,7 @@
             this.ShowText.TabIndex = 2;
             this.ShowText.Text = "▶";
             this.ShowText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ShowText.Click += new System.EventHandler(this.ShowText_Click);
             // 
             // Correct
             // 

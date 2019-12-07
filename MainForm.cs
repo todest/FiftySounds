@@ -19,7 +19,7 @@ namespace CS_GUI_DEMO
         readonly Dictionary<int, string> Ao = new Dictionary<int, string>();
         readonly Dictionary<int, string> Long = new Dictionary<int, string>();
         readonly Dictionary<int, string> Accent = new Dictionary<int, string>();
-        List<Tuple<int, int>> R = new List<Tuple<int, int>>();
+        readonly List<Tuple<int, int>> R = new List<Tuple<int, int>>();
         int Count = 0, CorrectCount, WrongCount;
         bool Over;
 
@@ -93,6 +93,26 @@ namespace CS_GUI_DEMO
             }
             return;
         }
+
+        public static bool CompareVersion(string new_version, string old_version)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(new_version) || string.IsNullOrEmpty(old_version))
+                    return false;
+
+                Version v_new = new Version(new_version);
+                Version v_old = new Version(old_version);
+                if (v_new > v_old)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         public static string Get(string url)
         {
@@ -234,6 +254,7 @@ namespace CS_GUI_DEMO
         private void MainForm_Load(object sender, EventArgs e)
         {
             /*默认设置*/
+            Submit.Text = "";
             ShowText.Text = "▶";
             Correct.Visible = false;
             Wrong.Visible = false;
@@ -242,6 +263,7 @@ namespace CS_GUI_DEMO
             Submit.Visible = false;
             Log.Visible = false;
             LogTitle.Visible = false;
+            Submit.ReadOnly = true;
             HiraganaToolStripMenuItem.Checked = true;
             KatakanaToolStripMenuItem.Checked = false;
             VoicedToolStripMenuItem.Checked = false;
@@ -270,7 +292,6 @@ namespace CS_GUI_DEMO
 
         private void StartToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Submit.Text = "";
             Log.Text = "";
             Submit.Visible = true;
             Submit.Focus();
@@ -285,8 +306,13 @@ namespace CS_GUI_DEMO
             }
             int[] Lvl = new int[10];
             int pos = 0;
+            Count = 0;
             Over = false;
+            Submit.Text = "";
+            Submit.ReadOnly = false;
             CorrectCount = WrongCount = 0;
+            Correct.Text = string.Format("正确: {0:D}", CorrectCount);
+            Wrong.Text = string.Format("错误: {0:D}", WrongCount);
             if (HiraganaToolStripMenuItem.Checked) Lvl[pos++] = 0;
             if (KatakanaToolStripMenuItem.Checked) Lvl[pos++] = 1;
             if (VoicedToolStripMenuItem.Checked) Lvl[pos++] = 2;
@@ -314,11 +340,16 @@ namespace CS_GUI_DEMO
                 int seconds = Convert.ToInt32(DateTime.Now.Subtract(Current).TotalSeconds);
                 int minutes=seconds/60;
                 Timer.Text = string.Format("{0:D2}:{1:D2}", minutes, seconds % 60);
-                if (Over) break;
+                if (Over)
+                {
+                    Submit.ReadOnly = true;
+                    break;
+                }
                 Delay(1000);
             }
             Schedule.Text = string.Format("正确率: {0:P}", 1.0 * CorrectCount / R.Count);
             ShowText.Text = "▶";
+            ShowText.Enabled = true;
         }
 
         private void HiraganaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -370,13 +401,9 @@ namespace CS_GUI_DEMO
         {
             string jsonText = Get("https://api.github.com/repos/todest/FiftySounds/releases/latest");
             RootObject rb = JsonConvert.DeserializeObject<RootObject>(jsonText);
-            if(rb.tag_name == "v" + Application.ProductVersion)
+            if (CompareVersion(rb.tag_name.Substring(1), Application.ProductVersion))
             {
-                MessageBox.Show("已是最新版本!", "检查更新");
-            }
-            else
-            {
-                if(MessageBox.Show("检测到新版本!  是否更新?", "检查更新", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("检测到新版本!  是否更新?", "检查更新", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     if (DownloadFile(rb.assets[0].browser_download_url, "update.exe"))
                     {
@@ -389,7 +416,7 @@ namespace CS_GUI_DEMO
                         }
                         fi.MoveTo("./update.old");
                         fo.MoveTo(oldName);
-                        if(MessageBox.Show("重启以完成更新!", "更新", MessageBoxButtons.OK) == DialogResult.OK)
+                        if (MessageBox.Show("重启以完成更新!", "更新", MessageBoxButtons.OK) == DialogResult.OK)
                         {
                             DelayRun(oldName, 1);
                             Application.Exit();
@@ -401,12 +428,22 @@ namespace CS_GUI_DEMO
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("已是最新版本!", "检查更新");
+            }
         }
 
         private void Log_TextChanged(object sender, EventArgs e)
         {
             Log.SelectionStart = Log.Text.Length;
             Log.ScrollToCaret();
+        }
+
+        private void ShowText_Click(object sender, EventArgs e)
+        {
+            if (ShowText.Text == "▶")
+            RestartToolStripMenuItem_Click(sender, e);
         }
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -429,14 +466,20 @@ namespace CS_GUI_DEMO
                         else if (R[Count].Item1 == 1)
                             Log.Text += Katakana[R[Count].Item2];
                         Log.Text += ":  " + Unvoiced[R[Count].Item2] + Environment.NewLine;
-                        
                     }
-                    if (R[Count].Item1 == 0) ShowText.Text = Hiragana[R[++Count].Item2];
-                    else if (R[Count].Item1 == 1) ShowText.Text = Katakana[R[++Count].Item2];
-                    else if (R[Count].Item1 == 2) ShowText.Text = Voiced[R[++Count].Item2];
-                    else if (R[Count].Item1 == 3) ShowText.Text = Ao[R[++Count].Item2];
-                    else if (R[Count].Item1 == 4) ShowText.Text = Long[R[++Count].Item2];
-                    else if (R[Count].Item1 == 5) ShowText.Text = Accent[R[++Count].Item2];
+                    if (Count + 1 < R.Count)
+                    {
+                        if (R[Count].Item1 == 0) ShowText.Text = Hiragana[R[++Count].Item2];
+                        else if (R[Count].Item1 == 1) ShowText.Text = Katakana[R[++Count].Item2];
+                        else if (R[Count].Item1 == 2) ShowText.Text = Voiced[R[++Count].Item2];
+                        else if (R[Count].Item1 == 3) ShowText.Text = Ao[R[++Count].Item2];
+                        else if (R[Count].Item1 == 4) ShowText.Text = Long[R[++Count].Item2];
+                        else if (R[Count].Item1 == 5) ShowText.Text = Accent[R[++Count].Item2];
+                    }
+                    else
+                    {
+                        Submit.ReadOnly = true;
+                    }
                 }
                 Submit.Text = "";
                 Correct.Text = string.Format("正确: {0:D}", CorrectCount);
