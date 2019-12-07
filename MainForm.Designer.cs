@@ -38,10 +38,10 @@
             this.LvlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HiraganaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.KatakanaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.VoicedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AccentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.VoicedHiraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.VoicedKataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AoHiraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AoKataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Submit = new System.Windows.Forms.TextBox();
@@ -67,7 +67,7 @@
             this.AboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(782, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(782, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -79,7 +79,7 @@
             this.ExitToolStripMenuItem,
             this.QuitToolStripMenuItem});
             this.ToolStripMenuItem.Name = "ToolStripMenuItem";
-            this.ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.ToolStripMenuItem.Text = "设置";
             // 
             // StartToolStripMenuItem
@@ -115,12 +115,12 @@
             this.LvlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.HiraganaToolStripMenuItem,
             this.KatakanaToolStripMenuItem,
-            this.VoicedToolStripMenuItem,
-            this.AoToolStripMenuItem,
-            this.LongToolStripMenuItem,
-            this.AccentToolStripMenuItem});
+            this.VoicedHiraToolStripMenuItem,
+            this.VoicedKataToolStripMenuItem,
+            this.AoHiraToolStripMenuItem,
+            this.AoKataToolStripMenuItem});
             this.LvlToolStripMenuItem.Name = "LvlToolStripMenuItem";
-            this.LvlToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.LvlToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.LvlToolStripMenuItem.Text = "级别";
             // 
             // HiraganaToolStripMenuItem
@@ -128,52 +128,56 @@
             this.HiraganaToolStripMenuItem.Checked = true;
             this.HiraganaToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.HiraganaToolStripMenuItem.Name = "HiraganaToolStripMenuItem";
-            this.HiraganaToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.HiraganaToolStripMenuItem.Text = "平假名";
+            this.HiraganaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.HiraganaToolStripMenuItem.Text = "清音-平假";
             this.HiraganaToolStripMenuItem.Click += new System.EventHandler(this.HiraganaToolStripMenuItem_Click);
             // 
             // KatakanaToolStripMenuItem
             // 
             this.KatakanaToolStripMenuItem.Name = "KatakanaToolStripMenuItem";
-            this.KatakanaToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.KatakanaToolStripMenuItem.Text = "片假名";
+            this.KatakanaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.KatakanaToolStripMenuItem.Text = "清音-片假";
             this.KatakanaToolStripMenuItem.Click += new System.EventHandler(this.KatakanaToolStripMenuItem_Click);
             // 
-            // VoicedToolStripMenuItem
+            // VoicedHiraToolStripMenuItem
             // 
-            this.VoicedToolStripMenuItem.Name = "VoicedToolStripMenuItem";
-            this.VoicedToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.VoicedToolStripMenuItem.Text = "浊音";
+            this.VoicedHiraToolStripMenuItem.Name = "VoicedHiraToolStripMenuItem";
+            this.VoicedHiraToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.VoicedHiraToolStripMenuItem.Text = "浊音-平假";
+            this.VoicedHiraToolStripMenuItem.Click += new System.EventHandler(this.VoicedHiraToolStripMenuItem_Click);
             // 
-            // AoToolStripMenuItem
+            // VoicedKataToolStripMenuItem
             // 
-            this.AoToolStripMenuItem.Name = "AoToolStripMenuItem";
-            this.AoToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.AoToolStripMenuItem.Text = "拗音";
+            this.VoicedKataToolStripMenuItem.Name = "VoicedKataToolStripMenuItem";
+            this.VoicedKataToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.VoicedKataToolStripMenuItem.Text = "浊音-片假";
+            this.VoicedKataToolStripMenuItem.Click += new System.EventHandler(this.VoicedKataToolStripMenuItem_Click);
             // 
-            // LongToolStripMenuItem
+            // AoHiraToolStripMenuItem
             // 
-            this.LongToolStripMenuItem.Name = "LongToolStripMenuItem";
-            this.LongToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.LongToolStripMenuItem.Text = "长音";
+            this.AoHiraToolStripMenuItem.Name = "AoHiraToolStripMenuItem";
+            this.AoHiraToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.AoHiraToolStripMenuItem.Text = "拗音-平假";
+            this.AoHiraToolStripMenuItem.Click += new System.EventHandler(this.AoHiraToolStripMenuItem_Click);
             // 
-            // AccentToolStripMenuItem
+            // AoKataToolStripMenuItem
             // 
-            this.AccentToolStripMenuItem.Name = "AccentToolStripMenuItem";
-            this.AccentToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.AccentToolStripMenuItem.Text = "促音";
+            this.AoKataToolStripMenuItem.Name = "AoKataToolStripMenuItem";
+            this.AoKataToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.AoKataToolStripMenuItem.Text = "拗音-片假";
+            this.AoKataToolStripMenuItem.Click += new System.EventHandler(this.AoKataToolStripMenuItem_Click);
             // 
             // UpdateToolStripMenuItem
             // 
             this.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem";
-            this.UpdateToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.UpdateToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.UpdateToolStripMenuItem.Text = "更新";
             this.UpdateToolStripMenuItem.Click += new System.EventHandler(this.UpdateToolStripMenuItem_Click);
             // 
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.AboutToolStripMenuItem.Text = "关于";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -324,10 +328,10 @@
         private System.Windows.Forms.ToolStripMenuItem HiraganaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem KatakanaToolStripMenuItem;
         private System.Windows.Forms.Label Timer;
-        private System.Windows.Forms.ToolStripMenuItem VoicedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem AoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem LongToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem AccentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem VoicedHiraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem VoicedKataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AoHiraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AoKataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem UpdateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
         private System.Windows.Forms.TextBox Log;

@@ -16,9 +16,11 @@ namespace CS_GUI_DEMO
         readonly Dictionary<int, string> Hiragana = new Dictionary<int, string>();
         readonly Dictionary<int, string> Katakana = new Dictionary<int, string>();
         readonly Dictionary<int, string> Voiced = new Dictionary<int, string>();
+        readonly Dictionary<int, string> VoicedHira = new Dictionary<int, string>();
+        readonly Dictionary<int, string> VoicedKata = new Dictionary<int, string>();
         readonly Dictionary<int, string> Ao = new Dictionary<int, string>();
-        readonly Dictionary<int, string> Long = new Dictionary<int, string>();
-        readonly Dictionary<int, string> Accent = new Dictionary<int, string>();
+        readonly Dictionary<int, string> AoHira = new Dictionary<int, string>();
+        readonly Dictionary<int, string> AoKata = new Dictionary<int, string>();
         readonly List<Tuple<int, int>> R = new List<Tuple<int, int>>();
         int Count = 0, CorrectCount, WrongCount;
         bool Over;
@@ -48,7 +50,7 @@ namespace CS_GUI_DEMO
             Unvoiced.Add(43, "wa"); Unvoiced.Add(44, "wo");
             Unvoiced.Add(45, "n");
 
-            //平假名
+            //清音-平假
             Hiragana.Add(0, "あ"); Hiragana.Add(1, "い"); Hiragana.Add(2, "う"); Hiragana.Add(3, "え"); Hiragana.Add(4, "お");
             Hiragana.Add(5, "か"); Hiragana.Add(6, "き"); Hiragana.Add(7, "く"); Hiragana.Add(8, "け"); Hiragana.Add(9, "こ");
             Hiragana.Add(10, "さ"); Hiragana.Add(11, "し"); Hiragana.Add(12, "す"); Hiragana.Add(13, "せ"); Hiragana.Add(14, "そ");
@@ -61,8 +63,7 @@ namespace CS_GUI_DEMO
             Hiragana.Add(43, "わ"); Hiragana.Add(44, "を");
             Hiragana.Add(45, "ん");
 
-
-            //片假名
+            //清音-片假
             Katakana.Add(0, "ア"); Katakana.Add(1, "イ"); Katakana.Add(2, "ウ"); Katakana.Add(3, "エ"); Katakana.Add(4, "オ");
             Katakana.Add(5, "カ"); Katakana.Add(6, "キ"); Katakana.Add(7, "ク"); Katakana.Add(8, "ケ"); Katakana.Add(9, "コ");
             Katakana.Add(10, "サ"); Katakana.Add(11, "シ"); Katakana.Add(12, "ス"); Katakana.Add(13, "セ"); Katakana.Add(14, "ソ");
@@ -76,12 +77,64 @@ namespace CS_GUI_DEMO
             Katakana.Add(45, "ン");
 
             //浊音
+            Voiced.Add(0, "ga"); Voiced.Add(1, "gi"); Voiced.Add(2, "gu"); Voiced.Add(3, "ge"); Voiced.Add(4, "go");
+            Voiced.Add(5, "za"); Voiced.Add(6, "ji"); Voiced.Add(7, "zu"); Voiced.Add(8, "ze"); Voiced.Add(9, "zo");
+            Voiced.Add(10, "da"); Voiced.Add(11, "ji"); Voiced.Add(12, "zu"); Voiced.Add(13, "de"); Voiced.Add(14, "do");
+            Voiced.Add(15, "ba"); Voiced.Add(16, "bi"); Voiced.Add(17, "bu"); Voiced.Add(18, "be"); Voiced.Add(19, "bo");
+            Voiced.Add(20, "pa"); Voiced.Add(21, "pi"); Voiced.Add(22, "pu"); Voiced.Add(23, "pe"); Voiced.Add(24, "po");
+
+            //浊音-平假
+            VoicedHira.Add(0, "が"); VoicedHira.Add(1, "ぎ"); VoicedHira.Add(2, "ぐ"); VoicedHira.Add(3, "げ"); VoicedHira.Add(4, "ご");
+            VoicedHira.Add(5, "ざ"); VoicedHira.Add(6, "じ"); VoicedHira.Add(7, "ず"); VoicedHira.Add(8, "ぜ"); VoicedHira.Add(9, "ぞ");
+            VoicedHira.Add(10, "だ"); VoicedHira.Add(11, "ぢ"); VoicedHira.Add(12, "づ"); VoicedHira.Add(13, "で"); VoicedHira.Add(14, "ど");
+            VoicedHira.Add(15, "ば"); VoicedHira.Add(16, "び"); VoicedHira.Add(17, "ぶ"); VoicedHira.Add(18, "べ"); VoicedHira.Add(19, "ぼ");
+            VoicedHira.Add(20, "ぱ"); VoicedHira.Add(21, "ぴ"); VoicedHira.Add(22, "ぷ"); VoicedHira.Add(23, "ぺ"); VoicedHira.Add(24, "ぽ");
+
+            //浊音-片假
+            VoicedKata.Add(0, "ガ"); VoicedKata.Add(1, "ギ"); VoicedKata.Add(2, "グ"); VoicedKata.Add(3, "ゲ"); VoicedKata.Add(4, "ゴ");
+            VoicedKata.Add(5, "ザ"); VoicedKata.Add(6, "ジ"); VoicedKata.Add(7, "ズ"); VoicedKata.Add(8, "ゼ"); VoicedKata.Add(9, "ゾ");
+            VoicedKata.Add(10, "ダ"); VoicedKata.Add(11, "ヂ"); VoicedKata.Add(12, "ヅ"); VoicedKata.Add(13, "デ"); VoicedKata.Add(14, "ド");
+            VoicedKata.Add(15, "バ"); VoicedKata.Add(16, "ビ"); VoicedKata.Add(17, "ブ"); VoicedKata.Add(18, "ベ"); VoicedKata.Add(19, "ボ");
+            VoicedKata.Add(20, "パ"); VoicedKata.Add(21, "ピ"); VoicedKata.Add(22, "プ"); VoicedKata.Add(23, "ペ"); VoicedKata.Add(24, "ポ");
 
             //拗音
+            Ao.Add(0, "kya"); Ao.Add(1, "kyu"); Ao.Add(2, "kyo");
+            Ao.Add(3, "gya"); Ao.Add(4, "gyu"); Ao.Add(5, "gyo");
+            Ao.Add(6, "sha"); Ao.Add(7, "shu"); Ao.Add(8, "sho");
+            Ao.Add(9, "cha"); Ao.Add(10, "chu"); Ao.Add(11, "cho");
+            Ao.Add(12, "ja"); Ao.Add(13, "ju"); Ao.Add(14, "jo");
+            Ao.Add(15, "nya"); Ao.Add(16, "nyu"); Ao.Add(17, "nyo");
+            Ao.Add(18, "hya"); Ao.Add(19, "hyu"); Ao.Add(20, "hyo");
+            Ao.Add(21, "bya"); Ao.Add(22, "byu"); Ao.Add(23, "byo");
+            Ao.Add(24, "pya"); Ao.Add(25, "pyu"); Ao.Add(26, "pyo");
+            Ao.Add(27, "mya"); Ao.Add(28, "myu"); Ao.Add(29, "myo");
+            Ao.Add(30, "rya"); Ao.Add(31, "ryu"); Ao.Add(32, "ryo");
 
-            //长音
+            //拗音-平假
+            AoHira.Add(0, "きゃ"); AoHira.Add(1, "きゅ"); AoHira.Add(2, "きょ");
+            AoHira.Add(3, "ぎゃ"); AoHira.Add(4, "ぎゅ"); AoHira.Add(5, "ぎょ");
+            AoHira.Add(6, "しゃ"); AoHira.Add(7, "しゅ"); AoHira.Add(8, "しょ");
+            AoHira.Add(9, "ちゃ"); AoHira.Add(10, "ちゅ"); AoHira.Add(11, "ちょ");
+            AoHira.Add(12, "じゃ"); AoHira.Add(13, "じゅ"); AoHira.Add(14, "じょ");
+            AoHira.Add(15, "にゃ"); AoHira.Add(16, "にゅ"); AoHira.Add(17, "にょ");
+            AoHira.Add(18, "ひゃ"); AoHira.Add(19, "ひゅ"); AoHira.Add(20, "ひょ");
+            AoHira.Add(21, "びゃ"); AoHira.Add(22, "びゅ"); AoHira.Add(23, "びょ");
+            AoHira.Add(24, "ぴゃ"); AoHira.Add(25, "ぴゅ"); AoHira.Add(26, "ぴょ");
+            AoHira.Add(27, "みゃ"); AoHira.Add(28, "みゅ"); AoHira.Add(29, "みょ");
+            AoHira.Add(30, "りゃ"); AoHira.Add(31, "りゅ"); AoHira.Add(32, "りょ");
 
-            //促音
+            //拗音-片假
+            AoKata.Add(0, "キャ"); AoKata.Add(1, "キュ"); AoKata.Add(2, "キョ");
+            AoKata.Add(3, "ギャ"); AoKata.Add(4, "ギュ"); AoKata.Add(5, "ギョ");
+            AoKata.Add(6, "シャ"); AoKata.Add(7, "シュ"); AoKata.Add(8, "ショ");
+            AoKata.Add(9, "チャ"); AoKata.Add(10, "チュ"); AoKata.Add(11, "チョ");
+            AoKata.Add(12, "ジャ"); AoKata.Add(13, "ジュ"); AoKata.Add(14, "ジョ");
+            AoKata.Add(15, "ニャ"); AoKata.Add(16, "ニュ"); AoKata.Add(17, "ニョ");
+            AoKata.Add(18, "ヒャ"); AoKata.Add(19, "ヒュ"); AoKata.Add(20, "ヒョ");
+            AoKata.Add(21, "ビャ"); AoKata.Add(22, "ビュ"); AoKata.Add(23, "ビョ");
+            AoKata.Add(24, "ピャ"); AoKata.Add(25, "ピュ"); AoKata.Add(26, "ピョ");
+            AoKata.Add(27, "ミャ"); AoKata.Add(28, "ミュ"); AoKata.Add(29, "ミョ");
+            AoKata.Add(30, "リャ"); AoKata.Add(31, "リュ"); AoKata.Add(32, "リョ");
         }
 
         public static void Delay(int mm)
@@ -148,8 +201,7 @@ namespace CS_GUI_DEMO
 
         public bool DownloadFile(string URL, string filename)
         {
-            string tempPath = Path.GetDirectoryName(filename) + @"\temp";
-            Directory.CreateDirectory(tempPath);
+            string tempPath = Path.GetTempPath();
             string tempFile = tempPath + @"\" + Path.GetFileName(filename) + ".temp";
             if (File.Exists(tempFile))
             {
@@ -206,26 +258,26 @@ namespace CS_GUI_DEMO
                 }
                 else if (a[i] == 2)
                 {
-                    sum += Voiced.Count();
-                    for (int j = 0; j < Voiced.Count(); j++)
+                    sum += VoicedHira.Count();
+                    for (int j = 0; j < VoicedHira.Count(); j++)
                         L.Add(Tuple.Create(a[i], j));
                 }
                 else if (a[i] == 3)
                 {
-                    sum += Ao.Count();
-                    for (int j = 0; j < Ao.Count(); j++)
+                    sum += VoicedKata.Count();
+                    for (int j = 0; j < VoicedKata.Count(); j++)
                         L.Add(Tuple.Create(a[i], j));
                 }
                 else if (a[i] == 4)
                 {
-                    sum += Long.Count();
-                    for (int j = 0; j < Long.Count(); j++)
+                    sum += AoHira.Count();
+                    for (int j = 0; j < AoHira.Count(); j++)
                         L.Add(Tuple.Create(a[i], j));
                 }
                 else if (a[i] == 5)
                 {
-                    sum += Accent.Count();
-                    for (int j = 0; j < Accent.Count(); j++)
+                    sum += AoKata.Count();
+                    for (int j = 0; j < AoKata.Count(); j++)
                         L.Add(Tuple.Create(a[i], j));
                 }
             }
@@ -238,10 +290,10 @@ namespace CS_GUI_DEMO
             Schedule.Text = string.Format("{0:D} / {1:D}", 1, sum);
             if (R[0].Item1 == 0) ShowText.Text = Hiragana[R[0].Item2];
             else if (R[0].Item1 == 1) ShowText.Text = Katakana[R[0].Item2];
-            else if (R[0].Item1 == 2) ShowText.Text = Voiced[R[0].Item2];
-            else if (R[0].Item1 == 3) ShowText.Text = Ao[R[0].Item2];
-            else if (R[0].Item1 == 4) ShowText.Text = Long[R[0].Item2];
-            else if (R[0].Item1 == 5) ShowText.Text = Accent[R[0].Item2];
+            else if (R[0].Item1 == 2) ShowText.Text = VoicedHira[R[0].Item2];
+            else if (R[0].Item1 == 3) ShowText.Text = VoicedKata[R[0].Item2];
+            else if (R[0].Item1 == 4) ShowText.Text = AoHira[R[0].Item2];
+            else if (R[0].Item1 == 5) ShowText.Text = AoKata[R[0].Item2];
         }
 
         public MainForm()
@@ -266,23 +318,21 @@ namespace CS_GUI_DEMO
             Submit.ReadOnly = true;
             HiraganaToolStripMenuItem.Checked = true;
             KatakanaToolStripMenuItem.Checked = false;
-            VoicedToolStripMenuItem.Checked = false;
-            AoToolStripMenuItem.Checked = false;
-            LongToolStripMenuItem.Checked = false;
-            AccentToolStripMenuItem.Checked = false;
+            VoicedHiraToolStripMenuItem.Checked = false;
+            VoicedKataToolStripMenuItem.Checked = false;
+            AoHiraToolStripMenuItem.Checked = false;
+            AoKataToolStripMenuItem.Checked = false;
             StartToolStripMenuItem.Enabled = true;
             RestartToolStripMenuItem.Enabled = false;
             ExitToolStripMenuItem.Enabled = false;
             QuitToolStripMenuItem.Enabled = true;
-            MainForm_SizeChanged(sender, e);
-
-            /*待开发*/
             HiraganaToolStripMenuItem.Enabled = true;
             KatakanaToolStripMenuItem.Enabled = true;
-            VoicedToolStripMenuItem.Enabled = false;
-            AoToolStripMenuItem.Enabled = false;
-            LongToolStripMenuItem.Enabled = false;
-            AccentToolStripMenuItem.Enabled = false;
+            VoicedHiraToolStripMenuItem.Enabled = true;
+            VoicedKataToolStripMenuItem.Enabled = true;
+            AoHiraToolStripMenuItem.Enabled = true;
+            AoKataToolStripMenuItem.Enabled = true;
+            MainForm_SizeChanged(sender, e);
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -315,17 +365,17 @@ namespace CS_GUI_DEMO
             Wrong.Text = string.Format("错误: {0:D}", WrongCount);
             if (HiraganaToolStripMenuItem.Checked) Lvl[pos++] = 0;
             if (KatakanaToolStripMenuItem.Checked) Lvl[pos++] = 1;
-            if (VoicedToolStripMenuItem.Checked) Lvl[pos++] = 2;
-            if (AoToolStripMenuItem.Checked) Lvl[pos++] = 3;
-            if (LongToolStripMenuItem.Checked) Lvl[pos++] = 4;
-            if (AccentToolStripMenuItem.Checked) Lvl[pos++] = 5;
+            if (VoicedHiraToolStripMenuItem.Checked) Lvl[pos++] = 2;
+            if (VoicedKataToolStripMenuItem.Checked) Lvl[pos++] = 3;
+            if (AoHiraToolStripMenuItem.Checked) Lvl[pos++] = 4;
+            if (AoKataToolStripMenuItem.Checked) Lvl[pos++] = 5;
 
             HiraganaToolStripMenuItem.Enabled = false;
             KatakanaToolStripMenuItem.Enabled = false;
-            VoicedToolStripMenuItem.Enabled = false;
-            AoToolStripMenuItem.Enabled = false;
-            LongToolStripMenuItem.Enabled = false;
-            AccentToolStripMenuItem.Enabled = false;
+            VoicedHiraToolStripMenuItem.Enabled = false;
+            VoicedKataToolStripMenuItem.Enabled = false;
+            AoHiraToolStripMenuItem.Enabled = false;
+            AoKataToolStripMenuItem.Enabled = false;
 
             LoadTest(Lvl, pos);
             Log.Visible = true;
@@ -340,12 +390,12 @@ namespace CS_GUI_DEMO
                 int seconds = Convert.ToInt32(DateTime.Now.Subtract(Current).TotalSeconds);
                 int minutes=seconds/60;
                 Timer.Text = string.Format("{0:D2}:{1:D2}", minutes, seconds % 60);
+                Delay(1000);
                 if (Over)
                 {
                     Submit.ReadOnly = true;
                     break;
                 }
-                Delay(1000);
             }
             Schedule.Text = string.Format("正确率: {0:P}", 1.0 * CorrectCount / R.Count);
             ShowText.Text = "▶";
@@ -354,18 +404,50 @@ namespace CS_GUI_DEMO
 
         private void HiraganaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (KatakanaToolStripMenuItem.Checked || VoicedToolStripMenuItem.Checked ||
-                AoToolStripMenuItem.Checked || LongToolStripMenuItem.Checked ||
-                LongToolStripMenuItem.Checked || AccentToolStripMenuItem.Checked)
+            if (KatakanaToolStripMenuItem.Checked || VoicedHiraToolStripMenuItem.Checked ||
+                VoicedKataToolStripMenuItem.Checked || AoHiraToolStripMenuItem.Checked ||
+                AoHiraToolStripMenuItem.Checked || AoKataToolStripMenuItem.Checked)
                 HiraganaToolStripMenuItem.Checked = !HiraganaToolStripMenuItem.Checked;
         }
 
         private void KatakanaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (HiraganaToolStripMenuItem.Checked || VoicedToolStripMenuItem.Checked ||
-                AoToolStripMenuItem.Checked || LongToolStripMenuItem.Checked ||
-                LongToolStripMenuItem.Checked || AccentToolStripMenuItem.Checked)
+            if (HiraganaToolStripMenuItem.Checked || VoicedHiraToolStripMenuItem.Checked ||
+                VoicedKataToolStripMenuItem.Checked || AoHiraToolStripMenuItem.Checked ||
+                AoHiraToolStripMenuItem.Checked || AoKataToolStripMenuItem.Checked)
                 KatakanaToolStripMenuItem.Checked = !KatakanaToolStripMenuItem.Checked;
+        }
+
+        private void VoicedHiraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (KatakanaToolStripMenuItem.Checked || HiraganaToolStripMenuItem.Checked ||
+                VoicedKataToolStripMenuItem.Checked || AoHiraToolStripMenuItem.Checked ||
+                AoHiraToolStripMenuItem.Checked || AoKataToolStripMenuItem.Checked)
+                VoicedHiraToolStripMenuItem.Checked = !VoicedHiraToolStripMenuItem.Checked;
+        }
+
+        private void VoicedKataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (KatakanaToolStripMenuItem.Checked || VoicedHiraToolStripMenuItem.Checked ||
+                HiraganaToolStripMenuItem.Checked || AoHiraToolStripMenuItem.Checked ||
+                AoHiraToolStripMenuItem.Checked || AoKataToolStripMenuItem.Checked)
+                VoicedKataToolStripMenuItem.Checked = !VoicedKataToolStripMenuItem.Checked;
+        }
+
+        private void AoHiraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (KatakanaToolStripMenuItem.Checked || VoicedHiraToolStripMenuItem.Checked ||
+                VoicedKataToolStripMenuItem.Checked || HiraganaToolStripMenuItem.Checked ||
+                AoHiraToolStripMenuItem.Checked || AoKataToolStripMenuItem.Checked)
+                AoHiraToolStripMenuItem.Checked = !AoHiraToolStripMenuItem.Checked;
+        }
+
+        private void AoKataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (KatakanaToolStripMenuItem.Checked || VoicedHiraToolStripMenuItem.Checked ||
+                VoicedKataToolStripMenuItem.Checked || AoHiraToolStripMenuItem.Checked ||
+                AoHiraToolStripMenuItem.Checked || HiraganaToolStripMenuItem.Checked)
+                AoKataToolStripMenuItem.Checked = !AoKataToolStripMenuItem.Checked;
         }
 
         private void RestartToolStripMenuItem_Click(object sender, EventArgs e)
@@ -418,7 +500,7 @@ namespace CS_GUI_DEMO
         private void ShowText_Click(object sender, EventArgs e)
         {
             if (ShowText.Text == "▶")
-            RestartToolStripMenuItem_Click(sender, e);
+            StartToolStripMenuItem_Click(sender, e);
         }
 
         private void BackUpdate_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -444,7 +526,7 @@ namespace CS_GUI_DEMO
                             fo.MoveTo(oldName);
                             if (MessageBox.Show("重启以完成更新!", "更新", MessageBoxButtons.OK) == DialogResult.OK)
                             {
-                                DelayRun(oldName, 1);
+                                DelayRun(oldName, 2);
                                 Application.Exit();
                             }
                         }
@@ -486,29 +568,56 @@ namespace CS_GUI_DEMO
                             Log.Text += Katakana[R[Count].Item2];
                         Log.Text += ":  " + Unvoiced[R[Count].Item2] + Environment.NewLine;
                     }
-                    if (Count + 1 < R.Count)
-                    {
-                        if (R[Count].Item1 == 0) ShowText.Text = Hiragana[R[++Count].Item2];
-                        else if (R[Count].Item1 == 1) ShowText.Text = Katakana[R[++Count].Item2];
-                        else if (R[Count].Item1 == 2) ShowText.Text = Voiced[R[++Count].Item2];
-                        else if (R[Count].Item1 == 3) ShowText.Text = Ao[R[++Count].Item2];
-                        else if (R[Count].Item1 == 4) ShowText.Text = Long[R[++Count].Item2];
-                        else if (R[Count].Item1 == 5) ShowText.Text = Accent[R[++Count].Item2];
-                    }
+                }
+                else if (R[Count].Item1 <= 3)
+                {
+                    if (Submit.Text == Voiced[R[Count].Item2]) CorrectCount++;
                     else
                     {
-                        Submit.ReadOnly = true;
+                        WrongCount++;
+                        if (R[Count].Item1 == 2)
+                            Log.Text += VoicedHira[R[Count].Item2];
+                        else if (R[Count].Item1 == 3)
+                            Log.Text += VoicedKata[R[Count].Item2];
+                        Log.Text += ":  " + Voiced[R[Count].Item2] + Environment.NewLine;
                     }
+                }
+                else
+                {
+                    if (Submit.Text == Ao[R[Count].Item2]) CorrectCount++;
+                    else
+                    {
+                        WrongCount++;
+                        if (R[Count].Item1 == 4)
+                            Log.Text += AoHira[R[Count].Item2];
+                        else if (R[Count].Item1 == 5)
+                            Log.Text += AoKata[R[Count].Item2];
+                        Log.Text += ":  " + Ao[R[Count].Item2] + Environment.NewLine;
+                    }
+                }
+                if (Count + 1 < R.Count)
+                {
+                    if (R[Count + 1].Item1 == 0) ShowText.Text = Hiragana[R[++Count].Item2];
+                    else if (R[Count + 1].Item1 == 1) ShowText.Text = Katakana[R[++Count].Item2];
+                    else if (R[Count + 1].Item1 == 2) ShowText.Text = VoicedHira[R[++Count].Item2];
+                    else if (R[Count + 1].Item1 == 3) ShowText.Text = VoicedKata[R[++Count].Item2];
+                    else if (R[Count + 1].Item1 == 4) ShowText.Text = AoHira[R[++Count].Item2];
+                    else if (R[Count + 1].Item1 == 5) ShowText.Text = AoKata[R[++Count].Item2];
+                }
+                else if (Count + 1 == R.Count)
+                {
+                    Count++;
+                    Submit.ReadOnly = true;
                 }
                 Submit.Text = "";
                 Correct.Text = string.Format("正确: {0:D}", CorrectCount);
                 Wrong.Text = string.Format("错误: {0:D}", WrongCount);
-                if (Count + 1 == R.Count)
+                Schedule.Text = string.Format("{0:D} / {1:D}", Count, R.Count);
+                if (Count == R.Count)
                 {
                     Over = true;
                     return;
                 }
-                Schedule.Text = string.Format("{0:D} / {1:D}", Count, R.Count);
             }
         }
     }
